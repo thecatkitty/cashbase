@@ -1,0 +1,68 @@
+nav ul { padding: 0; }
+nav li { display: inline-block; padding: 0 1em; }
+
+table { border-collapse: collapse; }
+table th { text-align: center; }
+
+form td { padding: 0 0.5em; }
+
+.panel { margin-top: 1em; }
+.panel-primary, .btn-primary { border-color: green; }
+.panel-primary .panel-heading, .btn-primary { background-color: green; }
+.btn-primary:focus, .btn-primary:hover { background-color: #0D0; }
+
+#saldo { font-size: 3em; }
+
+#transaction-list tr { border-bottom: dotted white 1px; }
+#transaction-list tbody { text-align: left; }
+#transaction-list td:first-child, #transaction-list td:nth-child(3) {
+  text-align: right;
+  padding-right: 1em;
+}
+#transaction-list tbody tr.in { background: #cfc; }
+#transaction-list tbody tr.in:nth-child(even) { background: #afa; }
+#transaction-list tbody tr.in:hover { background: #dfd; }
+#transaction-list tbody tr.out { background: #faa; }
+#transaction-list tbody tr.out:nth-child(even) { background: #f88; }
+#transaction-list tbody tr.out:hover { background: #fcc; }
+#transaction-list tfoot tr { background: #eee }
+#transaction-list tfoot tr:nth-child(even) { background: #bbb }
+
+.emoji { font-family: "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", Times, Symbola, Aegyptus, Code2000, Code2001, Code2002, Musica, sans-serif, LastResort }
+a.emoji, nav li a { text-decoration: none; }
+nav li a span.emoji { display: block; font-size: 5em; opacity: 0.5; transition: 0.5s; }
+nav li a span.emoji:hover { font-size: 6em; opacity: 1; }
+aside nav li a:hover { text-decoration: none; }
+
+#lean_overlay {
+  position: fixed;
+  z-index: 100;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  background: #000;
+  display: none;
+}
+
+.dialog {
+  width: 400px;
+  padding: 1em;
+  display:none;
+  background: #FFF;
+  border-radius: 5px;
+  box-shadow: 0px 0px 4px rgba(0,0,0,0.7);
+}
+
+@media (max-width: 800px) {
+  nav li a span:not(.emoji) { display: none; }
+  nav li a span.emoji { font-size: 3em; }
+  nav li a span.emoji:hover { font-size: 4em; }
+}
+
+@media (max-width: 500px) {
+  nav li { display: block; clear: both; text-align: left; font-size: 2em; }
+  nav li a span { display: block !important; margin-right: 0.5em; }
+  nav li a span.emoji { float: left; font-size: 1em; opacity: 1; }
+  nav li a span.emoji:hover { font-size: 1em; }
+}

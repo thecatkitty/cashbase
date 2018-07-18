@@ -1,0 +1,8 @@
+{
+  "TimeZone": "Europe/Warsaw",
+  "Users": [
+    { "name": "", "password": "", "level": 0 },
+    { "name": "<summary_viewer>", "password": "<password>", "level": 1 },
+    { "name": "<owner>", "password": "<password>", "level": 2 }
+  ]
+}

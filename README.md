@@ -1,25 +1,35 @@
-Celones CashBase, version 1.1
+Celones CashBase, version 1.5
 =============================
 
-Why version 1.1? There was a version 1.0, which used no CSS framework but it got replaced, most probably without doing any backup.
+It's the first safely-usable version of my, at first written for myself, money management system.
 
-Still, it's total garbage, but apparently You are (a note for anyone reading this in the future: a good friend of mine asked me to create this repo) interesed in using of my money management tool.
+The version 1.5 features operation list with filtering and three types of charts: spending pie chart, income sources pie chart and balance-in-time bar chart.
 
-This revision is here just for historical purposes; for goodness sake, don't even try to use it, because the next version uses another database format and credentials storage! Run away as fast as You can and jump to 1.5 at once, please.
+Requirements
+------------
+PHP 5.6 and SQLite
 
 Configuration
 -------------
-Everything from the `web` directory needs to be placed in the HTTP server's document root. Before the first use You need to edit the `config.json` and provide Your new credentials. You need also to create a `cash.db` SQLite3 database file and create its structures (DDL in `data/database.sql`, transaction categories in `data/ikt.sql`). Remember that `www-data` needs to be able to read and write the database file!
+The `web` directory needs to be set as the document root. Before the first use You need to access the `install.php` file in Your web browser in order to provide Your credentials. After completing that, You should delete that file. Remember that `www-data` needs to be able to read and write the `data` folder!
 
-It should work.
+Changes from the previous version (1.1)
+---------------------------------------
+- database structure – now it's fully prepared for the development planned for the version 2; no indirect migrations of database should be needed
+- credentials storage – user name and salted hash stored safely in the database
+- removal of access levels – the current version is single-user (it used to had chartview-only users before)
+- removal of *Dokument* field and the document management module – it was completely impractical
+- basic separation of the logic and the view
+- removal of external Celones dependencies
 
-*Should.*
-
-Subjects to change in the next version (1.5)
---------------------------------------------
-- database structure – it's going to be more complicated and prepared for a complete rebuild and development planned for version 2 without the need for further migrations
-- credentials storage – user name and salted hash stored in the database instead of open text in JSON
-- abolition of access levels – the next version will be single-user (the database will be designed to use ACLs in the version 2)
-- abolition of *Dokument* field and the document management module – it was completely impractical
-
-The naming language in the code will be changed from Polish to English in the version 2. The interface is going to be internationalized as well.
+Features planned for the next major upgarde (2.0)
+-------------------------------------------------
+- complete rewrite using Twig and full separation between the view and the data
+- source code fully in English
+- multiple UI and operation category languages
+- ability to serve multiple users
+- ability for one user to have multiple _buckets_ in various currencies
+- _wallets_ shared between users
+- ACL-based _bucket_ access control
+- forking and merging of _buckets_
+- notifications about newer releases

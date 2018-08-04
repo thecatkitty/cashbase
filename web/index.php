@@ -67,9 +67,9 @@
     <ul>
      <li><a href="?action=home"><span class="emoji">&#x1F3E0;</span><span>Strona główna</span></a></li>
      <li><a href="?action=list"><span class="emoji">&#x1F4DC;</span><span>Lista transakcyj</span></a></li>
-     <li><a href="?action=sumchart"><span class="emoji">&#x1F4C8;</span><span>Wykres wydatków</span></a></li>
-     <li><a href="?action=iktchart"><span class="emoji">&#x1F4CA;</span><span>Wykres kategoryj</span></a></li>
-     <li><a href="?action=incchart"><span class="emoji">&#x1F4B8;</span><span>Wykres źródeł przychodu</span></a></li>
+     <li><a href="?action=time_chart"><span class="emoji">&#x1F4C8;</span><span>Wykres wydatków</span></a></li>
+     <li><a href="?action=spending_chart"><span class="emoji">&#x1F4CA;</span><span>Wykres kategoryj</span></a></li>
+     <li><a href="?action=income_chart"><span class="emoji">&#x1F4B8;</span><span>Wykres źródeł przychodu</span></a></li>
      <li><a href="?action=logoff"><span class="emoji">&#x1F511;</span><span>Wyloguj</span></a></li>
     </ul>
    </nav>

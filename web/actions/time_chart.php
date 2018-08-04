@@ -1,10 +1,10 @@
 <?php
-  if(!Zalogowany())
+  if(!Zalogowany(1))
     Uciekaj('home');
   else {
     $p_date = '/^\d{4}-\d{2}-\d{2}$/';
 
-    $filters = array('type' => 'out');
+    $filters = array();
 
     if(isset($_GET['from']) && preg_match($p_date, $_GET['from']))
       $filters['from'] = $_GET['from'];
@@ -13,13 +13,13 @@
     if(isset($_GET['to']) && preg_match($p_date, $_GET['to']))
       $filters['to'] = $_GET['to'];
 
-    $chart_data = get_piechart_data($filters);
+    $chart_data = get_barchart_data($filters);
 
     ob_start();
 ?>
-<h2>Wykres kategoryj</h2>
+<h2>Wykres wydatków</h2>
 <form method="get" class="form-inline">
- <input type="hidden" name="action" value="iktchart" />
+ <input type="hidden" name="action" value="time_chart" />
  
  <div class="form-group">
   <div class="input-group">
@@ -49,25 +49,53 @@
  var rawData = <?=json_encode($chart_data)?>;
  var chartData = {
    labels: [],
-   datasets: [{
-     data: [],
-     backgroundColor: []
-   }]
+   datasets: [
+     {
+       label: 'Przychody',
+       backgroundColor: '#8f8',
+       borderColor: 'green',
+       borderWidth: 3,
+       data: []
+     },
+     {
+       label: 'Wydatki',
+       backgroundColor: '#f88',
+       borderColor: 'red',
+       borderWidth: 3,
+       data: []
+     },
+     {
+       label: 'Suma',
+       backgroundColor: '#aaa',
+       borderColor: '#555',
+       borderWidth: 3,
+       data: []
+     }
+   ]
  };
+ var periods = [];
 
- var hueStep = 360 / rawData.length;
- rawData.forEach(function(element, index) {
-   chartData.labels.push(element.label);
-   chartData.datasets[0].data.push(element.value);
-   chartData.datasets[0].backgroundColor.push('hsl(' + Math.round(index * hueStep) + ', 60%,  70%)');
+ rawData.forEach(function(element) {
+   chartData.labels.push(element.period.name);
+   chartData.datasets[0].data.push(element.in);
+   chartData.datasets[1].data.push(element.out);
+   chartData.datasets[2].data.push(element.in + element.out);
+   periods[element.period.name] = {
+     from: element.period.from,
+     to: element.period.to
+   };
  });
 
  var myChart = new Chart(ctx, {
-   type: 'pie',
+   type: 'bar',
    data: chartData,
    options: {
-     legend: {
-       display: false
+     scales: {
+       yAxes: [{
+         ticks: {
+           beginAtZero: true
+         }
+       }]
      }
    }
  });
@@ -76,9 +104,10 @@
    var actPts = myChart.getElementsAtEvent(evt);
    var x = actPts[0]._model.label;
 
-   $('input[name=action]').val('list');
-   $('form').append('<input type="hidden" name="ikt" />');
-   $('input[name=ikt]').val(x[0] + '' + x[1]);
+   if(periods[x].from == periods[x].to)
+     $('input[name=action]').val('list');
+   $('input[name=from]').val(periods[x].from);
+   $('input[name=to]').val(periods[x].to);
    $('input[value=Filtruj]').click();
  }
 </script>

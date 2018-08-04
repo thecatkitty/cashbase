@@ -4,7 +4,7 @@
   else {
     $p_date = '/^\d{4}-\d{2}-\d{2}$/';
 
-    $filters = array('type' => 'in');
+    $filters = array('type' => 'out');
 
     if(isset($_GET['from']) && preg_match($p_date, $_GET['from']))
       $filters['from'] = $_GET['from'];
@@ -17,9 +17,9 @@
 
     ob_start();
 ?>
-<h2>Wykres źródeł przychodu</h2>
+<h2>Wykres kategoryj</h2>
 <form method="get" class="form-inline">
- <input type="hidden" name="action" value="incchart" />
+ <input type="hidden" name="action" value="spending_chart" />
  
  <div class="form-group">
   <div class="input-group">

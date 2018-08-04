@@ -1,6 +1,6 @@
 <?php
   ob_start();
-  if(!Uprawnienia(1)) {
+  if(!Zalogowany()) {
 ?>
 <h2>Wpisz hasło</h2>
 
@@ -23,17 +23,13 @@
   </div>
  </div>
 </form>
-<?php
-  } else { 
-    $res = $db->query("SELECT SUM(kwota) AS saldo FROM transakcja WHERE usun=='FALSE'");
-    $res = $res->fetchArray(SQLITE3_ASSOC);
-?>
+<?php } else { ?>
 <div class="panel panel-primary">
  <div class="panel-heading">
   <h2 class="panel-title">Stan środków</h2>
  </div>
  <div class="panel-body" id="saldo">
-  <?=number_format($res['saldo'], 2, ',', ' ')?> zł
+  <?=number_format(get_total(), 2, ',', ' ')?> zł
  </div>
 </div>
 <?php

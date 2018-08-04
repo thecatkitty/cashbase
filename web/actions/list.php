@@ -1,30 +1,25 @@
 <?php
-  if(!Uprawnienia(2))
+  if(!Zalogowany())
     Uciekaj('home');
   else {
-    $l_from = isset($_GET['from']) ? $_GET['from'] : false;
-    $l_to = isset($_GET['to']) ? $_GET['to'] : false;
-    $l_ikt = isset($_GET['ikt']) ? $_GET['ikt'] : false;
-    $l_type = isset($_GET['type']) ? $_GET['type'] : false;
-
     $p_date = '/^\d{4}-\d{2}-\d{2}$/';
     $p_ikt = '/^\d{2}(-\d{2})?$/';
     $p_type = '/^(in|out)$/';
 
-    if(!$l_from || !preg_match($p_date, $l_from))
-      $l_from = date('Y-m-d', strtotime('-1 month'));
-    if($l_to) if(!preg_match($p_date, $l_to)) $l_to = false;
-    if($l_ikt) if(!preg_match($p_ikt, $l_ikt)) $l_ikt = false;
-    if($l_type) if(!preg_match($p_type, $l_type)) $l_type = false;
+    $filters = array();
 
-    $sql = "SELECT * FROM transakcja WHERE data>='$l_from'";
-    if($l_to) $sql .= " AND data<='$l_to'";
-    if($l_ikt) $sql .= " AND ikt LIKE '$l_ikt%'";
-    if($l_type)
-      if($l_type == 'in') $sql .= " AND kwota>0";
-      else $sql .= " AND kwota<0";
-
-    $res = $db->query($sql);
+    if(isset($_GET['from']) && preg_match($p_date, $_GET['from']))
+      $filters['from'] = $_GET['from'];
+    else
+      $filters['from'] = date('Y-m-d', strtotime('-1 month'));
+    if(isset($_GET['to']) && preg_match($p_date, $_GET['to']))
+      $filters['to'] = $_GET['to'];
+    if(isset($_GET['ikt']) && preg_match($p_ikt, $_GET['ikt']))
+      $filters['category'] = $_GET['ikt'];
+    if(isset($_GET['type']) && preg_match($p_type, $_GET['type']))
+      $filters['type'] = $_GET['type'];
+    
+    $operations = get_operations($filters);
 
     ob_start();
 ?>
@@ -37,7 +32,7 @@
    <div class="input-group-addon">
     <label for="from">Od</label>
    </div>
-   <input type="date" name="from" value="<?=$l_from?>" class="form-control" />
+   <input type="date" name="from" value="<?=$filters['from']?>" class="form-control" />
   </div>
  </div>
  
@@ -74,45 +69,32 @@
  <input type="submit" class="btn btn-success" value="Filtruj" />
 </form>
 
-<table id="transaction-list">
- <thead><tr><th>ID</th><th>Data</th><th>Kwota</th><th>IKT</th><th>Opis</th><th>Dokument</th></tr></thead>
+<table id="operation-list">
+ <thead><tr><th>Edycja</th><th>Data</th><th>Kwota</th><th>IKT</th><th>Opis</th></tr></thead>
  <tbody>
 <?php
   $i = 0;
   $suma = 0;
-  while($row = $res->fetchArray(SQLITE3_ASSOC)) {
-    $s = ($row['usun'] == 'TRUE' ? '<del>' : '');
+  foreach($operations as $row) {
+    $s = ($row['strikeout'] == 1 ? '<del>' : '');
     $se = ($s == '' ? '' : '</del>');
 ?>
-  <tr class="<?=($row['kwota'] > 0 ? 'in' : 'out')?>">
+  <tr class="<?=($row['value'] > 0 ? 'in' : 'out')?>">
    <td>
-    <span><?=$s?><?=$row['id']?><?=$se?></span>
     <?php if($s == '') { ?><a href="#edit" class="emoji" title="Edytuj">&#x270F;</a><?php } ?>
     <a href="?action=delete&amp;id=<?=$row['id']?>" class="emoji" title="<?=($s == '' ? 'Usuń' : 'Przywróć')?>">&#x<?=($s == '' ? '274C' : '2714')?>;</a>
    </td>
-   <td data-v="<?=$row['data']?>"><?=$s?><?=FormatujDate($row['data'])?><?=$se?></td>
-   <td><?=$s?><?=number_format($row['kwota'], 2, ',', ' ')?><?=$se?></td>
-   <td><?=$s?><abbr class="emoji"><?=$row['ikt']?></abbr><?=$se?></td>
-   <td><?=$s?><?=$row['opis']?><?=$se?></td>
-   <td>
-<?php
-  echo $s;
-  switch($row['dokument']){
-    case '': echo 'b/d'; break;
-    case 0: echo 'n/d'; break;
-    default:
-      echo '<a href="docs/' . substr($row['data'], 2) . ' ' . $row['dokument'] . '.jpg">' . $row['dokument'] . '</a>';
-  }
-  echo $se;
-?>
-   </td>
+   <td data-v="<?=$row['date']?>"><?=$s?><?=FormatujDate($row['date'])?><?=$se?></td>
+   <td><?=$s?><?=number_format($row['value'], 2, ',', ' ')?><?=$se?></td>
+   <td><?=$s?><abbr class="emoji"><?=$row['category']?></abbr><?=$se?></td>
+   <td><?=$s?><?=$row['description']['caption']?><?=$se?></td>
   </tr>
-<?php $i++; if($s == '') $suma += $row['kwota']; } ?>
+<?php $i++; if($s == '') $suma += $row['value']; } ?>
  </tbody>
  <tfoot>
   <tr>
    <td>+</td>
-   <td colspan="5"><a href="#insert_form" rel="leanModal">Dodaj nowy</a></td>
+   <td colspan="4"><a href="#insert_form" rel="leanModal">Dodaj nowy</a></td>
   </tr>
   <tr>
    <th colspan="2">Suma</th>
@@ -155,13 +137,6 @@
   </div>
   
   <div class="form-group">
-   <label for="doc" class="col-sm-3 control-label">Dokument</label>
-   <div class="col-sm-9">
-    <input name="doc" placeholder="Tu wpisz numer dokumentu" autocomplete="off" class="form-control" />
-   </div>
-  </div>
-  
-  <div class="form-group">
    <div class="col-sm-12 text-right">
     <input type="submit" class="btn btn-success" value="Zapisz" />
 	<input type="button" class="btn btn-danger" value="Anuluj" onclick="close_modal('#insert_form'); return false" />
@@ -172,13 +147,13 @@
 
 <datalist id="ikts">
 <?php
- $res = $db->query("SELECT * FROM ikt");
- while($row = $res->fetchArray(SQLITE3_ASSOC))
-   echo '<option value="'. $row['id'] . '">'
-   . $row['id']
-   . ' - '
-   . $row['opis']
-   . '</option>';
+ foreach(get_ikts() as $row) {
+  echo '<option value="'. $row['id'] . '">'
+  . $row['id']
+  . ' - '
+  . $row['description']
+  . '</option>';
+ }
 ?>
 </datalist>
 <script src="skin/jquery.leanModal.min.js"></script>
@@ -194,7 +169,7 @@
      $('#insert_form input[name=doc]').removeAttr('value');
    });
 
-   $('#transaction-list a[href*="#edit"]').each(function(i) {
+   $('#operation-list a[href*="#edit"]').each(function(i) {
      $(this).click(function() {
        var row = $(this).parent().parent()[0];
        $('#insert_form input[name=id]').val($(row.cells[0].children[0]).text());
@@ -208,7 +183,7 @@
    });
    $('a[href=#insert_form]').leanModal({top: 200});
 
-   $('#transaction-list abbr.emoji').each(function(i) {
+   $('#operation-list abbr.emoji').each(function(i) {
      var ikt = $(this).text();
      $(this).attr('title', $('#ikts option[value*="' + ikt + '"]').text());
      $(this).html('&#x' + ikt_icons[ikt[0] + ikt[1]] + ';');

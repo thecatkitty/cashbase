@@ -1,13 +1,6 @@
 <?php
-  if(!Uprawnienia(1)) {
+  if(!Zalogowany())
     if(isset($_POST['n']) && isset($_POST['p']))
-      foreach($cVals['Users'] as $uid => $user)
-        if($_POST['n'] == $user['name']) {
-	        $t = bin2hex(openssl_random_pseudo_bytes(10));	
-          if($_POST['p'] && sha1($t.$_POST['p']) === sha1($t . $user['password']))
-            $_SESSION['_uid'] = $uid;
-            Uciekaj('home');
-        }
-  }
+      login_user($_POST['n'], $_POST['p']);
   Uciekaj('home');
 ?>

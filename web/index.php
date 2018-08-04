@@ -32,7 +32,7 @@
   <meta charset="utf-8"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Baza przychodów i wydatków</title>
+  <title>Celones CashBase</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
   <!--[if lt IE 9]>
    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -46,8 +46,8 @@
    <div class="container">
     <div class="navbar-header">
      <a class="navbar-brand emoji" href="?action=home">&#x1F4B8;</a>
-	 <span class="navbar-text visible-xs">Baza przychodów i wydatków</span>
-	 <span class="navbar-text hidden-xs">Baza przychodów i wydatków z podziałem na kategorie oraz systemem dokumentów</span>
+	   <span class="navbar-text visible-xs">Celones CashBase</span>
+	   <span class="navbar-text hidden-xs">System zarządzania przychodami i wydatkami Celones CashBase</span>
     </div>
    </div>
   </nav>

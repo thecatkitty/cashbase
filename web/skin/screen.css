@@ -13,22 +13,22 @@ form td { padding: 0 0.5em; }
 
 #saldo { font-size: 3em; }
 
-#transaction-list tr { border-bottom: dotted white 1px; }
-#transaction-list tbody { text-align: left; }
-#transaction-list td:first-child, #transaction-list td:nth-child(3) {
+#operation-list tr { border-bottom: dotted white 1px; }
+#operation-list tbody { text-align: left; }
+#operation-list td:first-child, #operation-list td:nth-child(3) {
   text-align: right;
   padding-right: 1em;
 }
-#transaction-list tbody tr.in { background: #cfc; }
-#transaction-list tbody tr.in:nth-child(even) { background: #afa; }
-#transaction-list tbody tr.in:hover { background: #dfd; }
-#transaction-list tbody tr.out { background: #faa; }
-#transaction-list tbody tr.out:nth-child(even) { background: #f88; }
-#transaction-list tbody tr.out:hover { background: #fcc; }
-#transaction-list tfoot tr { background: #eee }
-#transaction-list tfoot tr:nth-child(even) { background: #bbb }
+#operation-list tbody tr.in { background: #cfc; }
+#operation-list tbody tr.in:nth-child(even) { background: #afa; }
+#operation-list tbody tr.in:hover { background: #dfd; }
+#operation-list tbody tr.out { background: #faa; }
+#operation-list tbody tr.out:nth-child(even) { background: #f88; }
+#operation-list tbody tr.out:hover { background: #fcc; }
+#operation-list tfoot tr { background: #eee }
+#operation-list tfoot tr:nth-child(even) { background: #bbb }
 
-.emoji { font-family: "Noto Color Emoji", "Apple Color Emoji", "Segoe UI Emoji", Times, Symbola, Aegyptus, Code2000, Code2001, Code2002, Musica, sans-serif, LastResort }
+.emoji { font-family: "Segoe UI Emoji", "Noto Color Emoji", "Apple Color Emoji", "Arial Unicode MS", sans-serif }
 a.emoji, nav li a { text-decoration: none; }
 nav li a span.emoji { display: block; font-size: 5em; opacity: 0.5; transition: 0.5s; }
 nav li a span.emoji:hover { font-size: 6em; opacity: 1; }

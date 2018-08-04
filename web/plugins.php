@@ -36,12 +36,7 @@
     exit();
   }
 
-  function Uprawnienia($v) {
-    global $cVals;
-    if(isset($_SESSION['_uid']))
-      $p = $cVals['Users'][$_SESSION['_uid']]['level'];
-    else
-      $p = 0;
-    return ($p >= $v);
+  function Zalogowany() {
+    return isset($_SESSION['user']);
   }
 ?>

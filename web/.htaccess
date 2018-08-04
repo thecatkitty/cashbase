@@ -2,6 +2,5 @@ RewriteEngine On
 RewriteBase /
 
 RewriteRule /?\.htaccess$ - [F,L]
-RewriteRule ^/?cash\.db$ - [F,L]
 RewriteRule ^/?config\.json$ - [F,L]
 RewriteRule ^/?actions/ - [F,L]

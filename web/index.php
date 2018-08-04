@@ -9,7 +9,9 @@
   include_once('plugins.php');
 
   // Połącz z bazą
-  $db = new SQLite3('cash.db');
+  $db = new SQLite3('../data/cash.sl3');
+
+  require_once('providers.php');
 
   // Wykonaj akcję
   if(!isset($_GET['action']))
@@ -59,16 +61,13 @@
      echo $content;
    ?>
   </section>
-<?php if(Uprawnienia(1)) { ?>
+<?php if(Zalogowany()) { ?>
   <aside class="container text-center">
    <nav>
     <h2>Menu</h2>
     <ul>
      <li><a href="?action=home"><span class="emoji">&#x1F3E0;</span><span>Strona główna</span></a></li>
-<?php if(Uprawnienia(2)) { ?>
      <li><a href="?action=list"><span class="emoji">&#x1F4DC;</span><span>Lista transakcyj</span></a></li>
-     <li><a href="docs/"><span class="emoji">&#x1F5C2;</span><span>Lista dokumentów</span></a></li>
-<?php } ?>
      <li><a href="?action=sumchart"><span class="emoji">&#x1F4C8;</span><span>Wykres wydatków</span></a></li>
      <li><a href="?action=iktchart"><span class="emoji">&#x1F4CA;</span><span>Wykres kategoryj</span></a></li>
      <li><a href="?action=incchart"><span class="emoji">&#x1F4B8;</span><span>Wykres źródeł przychodu</span></a></li>

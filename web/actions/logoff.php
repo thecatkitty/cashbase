@@ -1,5 +1,5 @@
 <?php
-  if(Uprawnienia(1))
-    $_SESSION['_uid'] = 0;
+  if(Zalogowany())
+    logoff_user();
   Uciekaj('home');
 ?>

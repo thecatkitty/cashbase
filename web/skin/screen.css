@@ -1,3 +1,20 @@
+body { margin-top: 50px }
+body > .navbar { background-color: green }
+body > .navbar .navbar-brand, body > .navbar .navbar-text, .navbar .nav a:link, .navbar .nav a:visited { color: white }
+body > header, body > footer { text-align: center }
+header > h1 { font-size: 30px }
+footer { font-size: small; margin-top: 3em }
+
+a:link, a:visited { color: gray }
+a:hover, a:active { color: blue; transition: 0.5s; }
+
+iframe { max-width: 100% !important; }
+img { max-width: 100%; }
+
+table { width: 100%; }
+th { text-align: right; }
+textarea { width: 100%; }
+
 nav ul { padding: 0; }
 nav li { display: inline-block; padding: 0 1em; }
 

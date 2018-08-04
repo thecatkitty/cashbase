@@ -38,7 +38,6 @@
    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
-  <link rel="stylesheet" type="text/css" href="https://cdn.celones.pl/sskin/screen2.php?c=||gray|blue|green|white"/>
   <link rel="stylesheet" type="text/css" href="skin/screen.css"/>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
  </head>
@@ -84,7 +83,7 @@
   </script>
 <?php } ?>
   <footer class="container-fluid">
-   <p>© <?=OdRoku(2016)?> <a href="http://matriksoft.tczew.pl/">Mateusz Karcz</a>. Wszelkie prawa zastrzeżone.</p>
+   <p>© <?=OdRoku(2016)?> <a href="https://github.com/thecatkitty/cashbase">Mateusz Karcz</a>. Udostępniane na zasadach Licencji MIT.</p>
   </footer>
  </body>
 </html>

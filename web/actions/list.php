@@ -81,7 +81,7 @@
 ?>
   <tr class="<?=($row['value'] > 0 ? 'in' : 'out')?>">
    <td>
-    <?php if($s == '') { ?><a href="#edit" class="emoji" title="Edytuj">&#x270F;</a><?php } ?>
+    <?php if($s == '') { ?><a href="#edit" class="emoji" title="Edytuj" data-operation-id="<?=$row['id']?>">&#x270F;</a><?php } ?>
     <a href="?action=delete&amp;id=<?=$row['id']?>" class="emoji" title="<?=($s == '' ? 'Usuń' : 'Przywróć')?>">&#x<?=($s == '' ? '274C' : '2714')?>;</a>
    </td>
    <td data-v="<?=$row['date']?>"><?=$s?><?=FormatujDate($row['date'])?><?=$se?></td>
@@ -166,18 +166,15 @@
      $('#insert_form input[name=amount]').val("0.00");
      $('#insert_form input[name=ikt]').val('00-00');
      $('#insert_form input[name=desc]').removeAttr('value');
-     $('#insert_form input[name=doc]').removeAttr('value');
    });
 
    $('#operation-list a[href*="#edit"]').each(function(i) {
      $(this).click(function() {
        var row = $(this).parent().parent()[0];
-       $('#insert_form input[name=id]').val($(row.cells[0].children[0]).text());
-       $('#insert_form input[name=date]').val($(row.cells[1]).attr('data-v'));
+       $('#insert_form input[name=id]').val($(this).data('operationId'));
+       $('#insert_form input[name=date]').val($(row.cells[1]).data('v'));
        $('#insert_form input[name=amount]').val($(row.cells[2]).text().replace(',', '.'));
        $('#insert_form input[name=ikt]').val($(row.cells[3].children[0]).attr('title').substr(0, 5));
-       $('#insert_form input[name=desc]').val($(row.cells[4]).text());
-       $('#insert_form input[name=doc]').val($(row.cells[5]).text());
      });
      $(this).attr('href', '#insert_form');
    });

@@ -14,6 +14,8 @@
       $filters['from'] = date('Y-m-d', strtotime('-1 month'));
     if(isset($_GET['to']) && preg_match($p_date, $_GET['to']))
       $filters['to'] = $_GET['to'];
+    else
+      $filters['to'] = date('Y-m-d');
     if(isset($_GET['ikt']) && preg_match($p_ikt, $_GET['ikt']))
       $filters['category'] = $_GET['ikt'];
     if(isset($_GET['type']) && preg_match($p_type, $_GET['type']))
@@ -41,7 +43,7 @@
    <div class="input-group-addon">
     <label for="to">Do</label>
    </div>
-   <input type="date" name="to" value="<?=date('Y-m-d')?>" class="form-control" />
+   <input type="date" name="to" value="<?=$filters['to']?>" class="form-control" />
   </div>
  </div>
  
@@ -173,12 +175,13 @@
        var row = $(this).parent().parent()[0];
        $('#insert_form input[name=id]').val($(this).data('operationId'));
        $('#insert_form input[name=date]').val($(row.cells[1]).data('v'));
-       $('#insert_form input[name=amount]').val($(row.cells[2]).text().replace(',', '.'));
+       $('#insert_form input[name=amount]').val($(row.cells[2]).text().replace(',', '.').replace(' ', ''));
        $('#insert_form input[name=ikt]').val($(row.cells[3].children[0]).attr('title').substr(0, 5));
+       $('#insert_form input[name=desc]').val($(row.cells[4]).text());
      });
      $(this).attr('href', '#insert_form');
    });
-   $('a[href=#insert_form]').leanModal({top: 200});
+   $('a[href=#insert_form]').leanModal({top: 55});
 
    $('#operation-list abbr.emoji').each(function(i) {
      var ikt = $(this).text();

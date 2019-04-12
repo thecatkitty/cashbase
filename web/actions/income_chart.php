@@ -12,6 +12,8 @@
       $filters['from'] = date('Y-m-d', strtotime('-1 month'));
     if(isset($_GET['to']) && preg_match($p_date, $_GET['to']))
       $filters['to'] = $_GET['to'];
+    else
+      $filters['to'] = date('Y-m-d');
 
     $chart_data = get_piechart_data($filters);
 
@@ -35,7 +37,7 @@
    <div class="input-group-addon">
     <label for="to">Do</label>
    </div>
-   <input type="date" name="to" value="<?=date('Y-m-d')?>" class="form-control" />
+   <input type="date" name="to" value="<?=$filters['to']?>" class="form-control" />
   </div>
  </div>
  

@@ -48,7 +48,7 @@ form td { padding: 0 0.5em; }
 .emoji { font-family: "Segoe UI Emoji", "Noto Color Emoji", "Apple Color Emoji", "Arial Unicode MS", sans-serif }
 a.emoji, nav li a { text-decoration: none; }
 nav li a span.emoji { display: block; font-size: 5em; opacity: 0.5; transition: 0.5s; }
-nav li a span.emoji:hover { font-size: 6em; opacity: 1; }
+nav li a span.emoji:hover { opacity: 1; }
 aside nav li a:hover { text-decoration: none; }
 
 #lean_overlay {

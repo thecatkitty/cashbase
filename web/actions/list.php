@@ -177,6 +177,7 @@
        $('#insert_form input[name=date]').val($(row.cells[1]).data('v'));
        $('#insert_form input[name=amount]').val($(row.cells[2]).text().replace(',', '.').replace(' ', ''));
        $('#insert_form input[name=ikt]').val($(row.cells[3].children[0]).attr('title').substr(0, 5));
+       $('#insert_form input[name=desc]').val($(row.cells[4]).text());
      });
      $(this).attr('href', '#insert_form');
    });

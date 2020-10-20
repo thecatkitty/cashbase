@@ -16,7 +16,7 @@
         'description' => array(
           'caption' => $_POST['desc']
         ),
-        'value' => str_replace(",", '.', $_POST['amount']),
+        'value' => str_replace(",", '.', $_POST['amount']) * 100,
         'bucket' => 1,
         'owner' => $_SESSION['user'],
         'strikeout' => 0
@@ -28,7 +28,7 @@
         'description' => array(
           'caption' => $_POST['desc']
         ),
-        'value' => str_replace(",", '.', $_POST['amount']),
+        'value' => str_replace(",", '.', $_POST['amount']) * 100,
         'bucket' => 1,
         'owner' => $_SESSION['user'],
         'strikeout' => 0

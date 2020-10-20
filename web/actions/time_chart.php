@@ -79,9 +79,9 @@
 
  rawData.forEach(function(element) {
    chartData.labels.push(element.period.name);
-   chartData.datasets[0].data.push(element.in);
-   chartData.datasets[1].data.push(element.out);
-   chartData.datasets[2].data.push(element.in + element.out);
+   chartData.datasets[0].data.push(element.in / 100);
+   chartData.datasets[1].data.push(element.out / 100);
+   chartData.datasets[2].data.push(element.in / 100 + element.out / 100);
    periods[element.period.name] = {
      from: element.period.from,
      to: element.period.to

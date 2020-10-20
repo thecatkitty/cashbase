@@ -60,7 +60,7 @@
  var hueStep = 360 / rawData.length;
  rawData.forEach(function(element, index) {
    chartData.labels.push(element.label);
-   chartData.datasets[0].data.push(element.value);
+   chartData.datasets[0].data.push(element.value / 100);
    chartData.datasets[0].backgroundColor.push('hsl(' + Math.round(index * hueStep) + ', 60%,  70%)');
  });
 

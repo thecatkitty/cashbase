@@ -87,7 +87,7 @@
     <a href="?action=delete&amp;id=<?=$row['id']?>" class="emoji" title="<?=($s == '' ? 'Usuń' : 'Przywróć')?>">&#x<?=($s == '' ? '274C' : '2714')?>;</a>
    </td>
    <td data-v="<?=$row['date']?>"><?=$s?><?=FormatujDate($row['date'])?><?=$se?></td>
-   <td><?=$s?><?=number_format($row['value'], 2, ',', ' ')?><?=$se?></td>
+   <td><?=$s?><?=number_format($row['value'] / 100, 2, ',', ' ')?><?=$se?></td>
    <td><?=$s?><abbr class="emoji"><?=$row['category']?></abbr><?=$se?></td>
    <td><?=$s?><?=$row['description']['caption']?><?=$se?></td>
   </tr>
@@ -100,7 +100,7 @@
   </tr>
   <tr>
    <th colspan="2">Suma</th>
-   <td><?=number_format($suma, 2, ',', ' ')?></td>
+   <td><?=number_format($suma / 100, 2, ',', ' ')?></td>
    <td></td><td></td><td></td>
   </tr>
  </tfoot>

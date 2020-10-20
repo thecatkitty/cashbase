@@ -29,7 +29,7 @@
   <h2 class="panel-title">Stan środków</h2>
  </div>
  <div class="panel-body" id="saldo">
-  <?=number_format(get_total(), 2, ',', ' ')?> zł
+  <?=number_format(get_total() / 100, 2, ',', ' ')?> zł
  </div>
 </div>
 <?php

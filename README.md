@@ -1,13 +1,13 @@
-Celones CashBase, version 1.6
+Celones CashBase, version 1.7
 =============================
 
 It's a kind-of-usable version of my, at first written for myself, money management system.
 
-The version 1.6 features operation list with filtering and three types of charts: spending pie chart, income sources pie chart and balance-in-time bar chart.
+The version 1.7 features operation list with filtering and three types of charts: spending pie chart, income sources pie chart and balance-in-time bar chart.
 
 Requirements
 ------------
-PHP 5.6 and SQLite
+PHP 7 and SQLite
 
 Configuration
 -------------

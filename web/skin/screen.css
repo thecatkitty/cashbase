@@ -24,7 +24,7 @@ table th { text-align: center; }
 form td { padding: 0 0.5em; }
 
 .panel { margin-top: 1em; }
-.panel-primary, .btn-primary { border-color: green; }
+.panel-primary, .panel-primary .panel-heading, .btn-primary { border-color: green; }
 .panel-primary .panel-heading, .btn-primary { background-color: green; }
 .btn-primary:focus, .btn-primary:hover { background-color: #0D0; }
 

@@ -43,8 +43,8 @@ INSERT INTO Category (id, language, description) VALUES ('03-03', 'pl-PL', 'Śro
 INSERT INTO Category (id, language, description) VALUES ('03-04', 'pl-PL', 'Kleje przemysłowe');
 INSERT INTO Category (id, language, description) VALUES ('03-05', 'pl-PL', 'Pozostałe produkty chemiczne');
 INSERT INTO Category (id, language, description) VALUES ('03-06', 'pl-PL', 'Ścierki i zmywaki');
-INSERT INTO Category (id, language, description) VALUES ('03-07', 'pl-PL', 'Papiery toaletowe, ręczniki papierowe i husteczki higieniczne');
-INSERT INTO Category (id, language, description) VALUES ('03-08', 'pl-PL', 'Folie spożywcze i pergaminy');
+INSERT INTO Category (id, language, description) VALUES ('03-07', 'pl-PL', 'Papiery toaletowe, ręczniki papierowe i chusteczki higieniczne');
+INSERT INTO Category (id, language, description) VALUES ('03-08', 'pl-PL', 'Pergaminy, folie spożywcze i inne opakowania kuchenne');
 INSERT INTO Category (id, language, description) VALUES ('03-09', 'pl-PL', 'Sztućce wielokrotnego użytku');
 INSERT INTO Category (id, language, description) VALUES ('03-10', 'pl-PL', 'Sztućce jednorazowe');
 INSERT INTO Category (id, language, description) VALUES ('03-11', 'pl-PL', 'Garnki i patelnie');
